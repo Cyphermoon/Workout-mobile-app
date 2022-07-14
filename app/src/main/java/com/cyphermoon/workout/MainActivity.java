@@ -1,6 +1,7 @@
 package com.cyphermoon.workout;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +17,21 @@ public class MainActivity extends AppCompatActivity implements WorkoutListFragme
 
     @Override
     public void itemClicked(long id) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_WORKOUT_ID, id);
-        startActivity(intent);
+        View fragment_container = findViewById(R.id.workout_detail_fragment_container);
+        if(fragment_container != null){
+            WorkoutDetailFragment detailFragment = new WorkoutDetailFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            detailFragment.setWorkoutId(id);
+            ft.replace(R.id.workout_detail_fragment_container,detailFragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.addToBackStack(null);
+            ft.commit();
+        }
+        else{
+            Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra(DetailActivity.EXTRA_WORKOUT_ID, id);
+            startActivity(intent);
+        }
+
     }
 }
