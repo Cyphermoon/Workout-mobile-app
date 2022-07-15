@@ -10,12 +10,13 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Locale;
 
 
-public class StopWatchFragment extends Fragment {
+public class StopWatchFragment extends Fragment implements View.OnClickListener {
 
     private int seconds;
     private boolean running;
@@ -37,6 +38,15 @@ public class StopWatchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_stop_watch, container, false);
+
+        Button start = (Button) view.findViewById(R.id.start);
+        Button stop = (Button) view.findViewById(R.id.stop);
+        Button reset = (Button) view.findViewById(R.id.reset);
+
+        start.setOnClickListener(this);
+        stop.setOnClickListener(this);
+        reset.setOnClickListener(this);
+
         runTimer(view);
         return view;
     }
@@ -61,15 +71,15 @@ public class StopWatchFragment extends Fragment {
         if(wasRunning) running = true;
     }
 
-    public void startWatch(View view){
+    private void startWatch(){
         running = true;
     }
 
-    public void stopWatch(View view){
+    private void stopWatch(){
         running = false;
     }
 
-    public void resetWatch(View view){
+    private void resetWatch(){
         running = false;
         seconds = 0;
     }
@@ -99,4 +109,20 @@ public class StopWatchFragment extends Fragment {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.start:
+                startWatch();
+                break;
+
+            case R.id.stop:
+                stopWatch();
+                break;
+
+            case R.id.reset:
+                resetWatch();
+                break;
+        }
+    }
 }

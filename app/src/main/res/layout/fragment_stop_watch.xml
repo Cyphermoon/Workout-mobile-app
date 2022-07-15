@@ -21,8 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="@string/start"
-        android:onClick="startWatch"/>
+        android:text="@string/start" />
 
     <Button
         android:id="@+id/stop"
@@ -30,8 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/margin_top"
-        android:text="@string/stop"
-        android:onClick="stopWatch"/>
+        android:text="@string/stop" />
 
     <Button
         android:id="@+id/reset"
@@ -39,8 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/margin_top"
-        android:text="@string/reset"
-        android:onClick="resetWatch"/>
+        android:text="@string/reset" />
 
 
 

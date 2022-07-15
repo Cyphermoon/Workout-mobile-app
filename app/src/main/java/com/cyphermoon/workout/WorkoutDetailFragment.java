@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +19,16 @@ public class WorkoutDetailFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(savedInstanceState != null)  workoutId = savedInstanceState.getLong("workoutId");
-    }
+        else{
+                StopWatchFragment stopWatchFragment = new StopWatchFragment();
+                FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+                ft.add(R.id.stop_watch_fragment_container, stopWatchFragment);
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
